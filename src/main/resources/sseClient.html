@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+사용자 ID <input type="text" id="subscribeId"/>
+<input type="button" onclick="on()" value="연결ON"/>
+<input type="button" onclick="off()" value="연결OFF"/>
+<br>
+<br>
+[메세지출력]
+<div id="messageContainer"></div>
+<script>
+    var eventSource;
+    function on(){
+        var id = document.getElementById("subscribeId").value;
+        eventSource = new EventSource('http://localhost:8080/SSE/subscribe/'+id);
+
+        eventSource.onmessage=function(event){
+            console.log(event);
+            console.log(event.data);
+
+            const messageContainer = document.getElementById("messageContainer");
+            const messageElement = document.createElement("p");
+            messageElement.textContent = event.data;
+            messageContainer.appendChild(messageElement);
+        };
+    }
+
+
+
+
+    function off(){
+        eventSource.close();
+
+        const messageContainer = document.getElementById("messageContainer");
+        const messageElement = document.createElement("p");
+        messageElement.textContent = "연결 종료!"
+        messageContainer.appendChild(messageElement);
+    }
+
+
+
+</script>
+</html>
