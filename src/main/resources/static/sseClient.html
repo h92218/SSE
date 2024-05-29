@@ -13,6 +13,13 @@
         var id = document.getElementById("subscribeId").value;
         eventSource = new EventSource('http://localhost:8080/SSE/subscribe/'+id);
 
+        /*
+        eventSource.addEventListener('order',event =>{
+            console.log(event);
+            console.log(event.data);
+        })*/
+
+
         eventSource.onmessage=function(event){
             console.log(event);
             console.log(event.data);
@@ -22,6 +29,8 @@
             messageElement.textContent = event.data;
             messageContainer.appendChild(messageElement);
         };
+
+
     }
 
 

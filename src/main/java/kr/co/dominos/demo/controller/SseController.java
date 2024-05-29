@@ -33,5 +33,4 @@ public class SseController {
         sseService.sendToClient(id,request.getParameter("orderId"),request.getParameter("status"));
     }
 
-
 }
